@@ -1,0 +1,2 @@
+#Ignorar módulos de node (para que el proyecto no pese demasiado)
+node_modules/
