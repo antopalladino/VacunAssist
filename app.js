@@ -4,19 +4,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var expressSanitizer = require('express-sanitizer');
 
-//Base de datos
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  port     : '3306',
-  user     : 'grupo15',
-  password : 'f1FT33n',
-  database : 'vacunasssit'
-
-// suportBigNumbers : 'true' en caso de usar BIGINT en la BD
-// dateString : 'true' para tratar las fechas como strings
-});
 
 // Pone en variables las rutas de aplicación
 var indexRouter = require('./routes/index');
@@ -32,7 +21,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//agregando un sanitizador para las variables que ingresan los usuarios
+app.use(expressSanitizer());
 app.use(express.static(path.join(__dirname, 'public')));
+//agregando jQuery
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+//agregando ajax
+app.use('/ajax', express.static(__dirname + '/node_modules/ajax/lib/'));
+//agregando Bootstrap
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 
 // RUTEO de los archivos a direcciones en la aplicación
 app.use('/', indexRouter);
