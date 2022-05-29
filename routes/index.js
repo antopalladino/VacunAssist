@@ -79,4 +79,22 @@ router.post('/modificarContrasenia', function(req, res, next){
   res.render('modificarContrasenia', {title: 'Cambiar contraseña | VacunAssist'});
 });
 
+router.get('/solicitarTurnoFiebreAmarilla', function(req, res, next){
+  res.render('solicitarTurnoFiebreAmarilla', {title: 'Turno fiebre amarilla | VacunAssist'});
+});
+
+
+router.get('/turnosyCertificados', function(req, res, next){
+  res.render('turnosyCertificados', {title: 'Turnos y certificados | VacunAssist'});
+});
+
+router.get('/registroCompletado', function(req, res, next){
+  res.render('registroCompletado', {title: 'Registro completado | VacunAssist'});
+});
+
+router.get('/inicioPaciente', function(req, res, next){
+  res.render('inicioPaciente', {title: 'Menu | VacunAssist'});
+});
+
+
 module.exports = router;
