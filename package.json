@@ -21,6 +21,7 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "prisma": "^3.14.0"
+    "prisma": "^3.14.0",
+    "nodemon":"^2.0.16"
   }
 }

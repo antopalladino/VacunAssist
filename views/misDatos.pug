@@ -28,17 +28,16 @@ block content
 					<div class="col-3"><span>Genero:</span></div>
 					<div class="col-7"><span name="genero">#{paciente.genero}</span></div>
 					<div class="col-3"><span>Centro Preferencia:</span></div>
-					<div class="col-7"><span name="centro">#{paciente.centro}</span></div>
+					<div class="col-7"><span name="centro">#{paciente.centroId}</span></div><!--cambiar por nombre de centro-->
 					<div class="col-3"><span> Paciente de riesgo</span> </div>
 					<div class="col-7"></div><span name="esRiesgo">#{paciente.esRiesgo}</span></div>
 						<input type="submit" class="btn btn-outline-success" value="Modificar datos" class="form-control"/>
-						<button type="button" class="btn btn-outline-danger" onclick="document.forms[`modificarmail`].submit();">Modificar mail</button>
-						<button type="button" class="btn btn-outline-danger" onclick="document.forms[`modificarcontrasenia`].submit();">Modificar contraseña</button>
 
 
-					</form>
-					<form id="modificarmail" method="get" action="./modificarMail"></form>
-					<form id="modificarcontrasenia" method="get" action="./modificarContrasenia"></form>
+				</form>
+				<form method="get" action="./inicioPaciente">
+					<div class="col-7"><input type="submit" class="btn btn-warning" value="Ir al inicio" class="form-control"/></div>
+				</form>
 
 
 

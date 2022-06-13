@@ -9,7 +9,6 @@ html
     <link rel="stylesheet" type="text/css" href="./stylesheets/vacunAssist.css">
     <script src="./jquery/jquery.js"></script>
   body
-
     <!--- nabvar --->
     <div class="container-fluid">
       <div class="fixed-top">
@@ -18,20 +17,10 @@ html
             <a class="navbar-brand">
               <img src="./images/VacunAssistimg.jpeg" onclick="document.forms[`inicio`].submit();" style="width: 8vw; height: 12vh;">
             </a>
-            <form id="inicio" method="get" action="./inicioPaciente"></form>
+            <form id="inicio" method="get" action="./"></form>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <form class="d-flex">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active">
-                      <img src="./images/perfilimg.png" onclick="document.forms[`misdatos`].submit();" style="width: 8vw; height: 12vh;">
-                    </a>
-                  </li>
-                </ul>
-            </form>
-            <form id="misdatos" method="get" action="./misDatos"></form>
           </div>
         </nav>
       </div>
