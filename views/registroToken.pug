@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+  <div class="row"><div class="col-3"></div>
+    <div class="col-6">
+      <h1>Registro Exitoso</h1>
+    </div>
+  </div>
+
+  <div class="row"><div class="col-12">&nbsp;</div></div>
+
+  <div class="row">
+
+    <div class="col-1 col-md-3"></div>
+    <div class="col-10 col-md-6">
+
+      <p>Su registro en el sistema ha sido exitoso. Se ha generado un token para su usuario, debe guardardo ya que es necesario para iniciar sesi&oacute;n en el sistema.</p>
+      <h5>Token: #{token}</h5>
+
+      <form method="post" action="./">
+        <div class="form-group">
+          <div class="col-12 col-md-7"><input type="submit" class="btn btn-outline-info" value="Volver al Inicio" class="form-control"/></div>
+        </div>
+      </form>
+      
+    </div>
+    <div class="col-1 col-md-3"></div>
+  </div>

@@ -26,6 +26,24 @@ $("#formulario").submit(function(event){
   else if(!regexClave.test($("#clave").val())) validez = "Ingrese una contraseña válida.";
   else if($("#clave").val() != $("#clave2").val()) validez = "Las contraseñas deben coincidir.";
 
+
+  var ajxReq = $.ajax({ 
+    url         : 'http://localhost:3000/ajax/registro',
+    contentType : 'application/json',
+    dataType    : 'json',
+    async       : false,
+    data        : {dni: $("#dni").val(), email: $("#email").val()}
+  });
+  ajxReq.done(function(data, status, jqXhr){
+    if(data.resultado == "dni") validez = "Ese DNI ya se encuentra registrado.";
+    else if(data.resultado == "email") validez = "Ese Email ya se encuentra registrado.";
+  });
+  ajxReq.fail(function(jqXhr, textStatus, errorMessage){
+    alert("Se perdió la comunicación con el servidor");
+    event.preventDefault();
+  });
+
+
   /* Si validez se mantiene en "true" el formulario es correcto y se envía,
     caso contrario se muestra un mensaje y se cancela el envío. */
   if(validez != "true"){

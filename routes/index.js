@@ -10,8 +10,27 @@ router.all('/', function(req, res, next) {
   res.render('index', { title: 'Inicio | VacunAssist' });
 });
 
-router.post('/iniciarSesion', function(req, res, next) {
-  res.render('/', { title: 'Inicio | VacunAssist' });
+router.post('/iniciarSesion', async function(req, res, next) {
+  const paciente = await prisma.paciente.findUnique({
+    where:{ 
+      email: req.body.email,
+    }
+  });
+
+  if(paciente)
+    if((req.body.clave == paciente.clave) & (req.body.token == paciente.token)){
+      req.session.email = req.body.email;
+      res.render('misDatos', { title: 'Mis datos | VacunAssist', paciente: paciente });
+      console.log(req.session.email);
+    }
+    else{
+      res.render('index', { title: 'Inicio | VacunAssist', mensaje: 'Usuario o clave incorrecta.' });
+      console.log("Contraseña");
+    }
+  else{
+    res.render('index', { title: 'Inicio | VacunAssist', mensaje: 'Usuario o clave incorrecta.' });
+    console.log("No Existe");
+  }
 });
 
 
@@ -26,6 +45,31 @@ router.post('/registroPasoDos', function(req, res, next) {
   res.render('registroPasoDos',
     { title: 'Registro | VacunAssist', reque: reque }
   );
+});
+
+router.post('/registroToken', async function(req, res, next){
+  req.body.token = Math.floor((Math.random() * 8999) + 1000); // token random entre 1000 y 9999
+  console.log(req.body);
+  if(req.body.esRiesgo == "on") req.body.esRiesgo = "Si";
+  else req.body.esRiesgo = "No";
+  req.body.dni = parseInt(req.body.dni);
+  req.body.centro = parseInt(req.body.centro);
+  var fechaNac = new Date(req.body.fechaNac);
+  const paciente = await prisma.paciente.create({
+    data: {
+      email   : req.body.email,
+      nombre  : req.body.nombre,
+      apellido: req.body.apellido,
+      esRiesgo: req.body.esRiesgo,
+      fechaNacimiento: fechaNac,
+      dni     : req.body.dni,
+      clave   : req.body.clave,
+      token   : req.body.token,
+      genero  : req.body.genero,
+      centroId: req.body.centro
+    }
+  });
+  res.render('registroToken', {title: 'Registro Completo | VacunAssist', token: req.body.token});
 });
 
 router.get('/misDatos', async function(req, res, next){

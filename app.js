@@ -5,11 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressSanitizer = require('express-sanitizer');
+var session = require('express-session');
 
 
 // Pone en variables las rutas de aplicación
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var ajaxRouter = require('./routes/ajax');
 
 var app = express();
 
@@ -21,6 +23,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 //agregando un sanitizador para las variables que ingresan los usuarios
 app.use(expressSanitizer());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,6 +41,7 @@ app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'
 // RUTEO de los archivos a direcciones en la aplicación
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/ajax', ajaxRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
